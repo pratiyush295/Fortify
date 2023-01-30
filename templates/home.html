@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    Home
+{% endblock title %}
+
+{% block body %}
+<link rel="stylesheet" href="/static/css-home.css">
+<!-- <script src="https://cdn.tailwindcss.com"></script> -->
+</head>
+<body>
+
+<section class="h-100 gradient-form" >
+    <div class="container py-0 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-xl-30">
+          <div class="card rounded-3 text-black">
+            <div class="row g-0">
+              <div class="col-lg-6">
+                <div class="card-body p-md-5 mx-md-4">
+  
+                  <div class="text-center">
+                    <!-- <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
+                      style="width: 185px;" alt="logo"> -->
+                    <h1 class="mt-1 mb-5 pb-1 text-danger" style="font-size: 50px;">Fortify</h1>
+                  </div>
+  
+                  <form action="/login_validation" method="POST">
+                    <h2 class="mb-5 text-dark" style="font-family: Arial, Helvetica, sans-serif;"> Login</h2>
+  
+                    <div class="form-outline mb-4">
+                      <input type="text" id="form2Example11" name="email" userid class="form-control"
+                        placeholder="Username or Email" />
+                      <!-- <label class="form-label mt-1" for="form2Example11">Username</label> -->
+                    </div>
+  
+                    <div class="form-outline mb-4">
+                      <input type="password" id="form2Example22" name="password" class="form-control" placeholder="Password" />
+                      <!-- <label class="form-label" for="form2Example22">Password</label> -->
+                    </div>
+  
+                    <div class="text-center pt-1 mb-5 pb-1">
+                      <button  class="btn btn-primary btn-block p-4 fa-lg gradient-custom-2 mb-3" type="submit" style="font-size: 21px;">Log
+                        in</button>
+                      <!-- <a class="text-muted" href="#!">Forgot password?</a> -->
+                    </div>
+                    {% if message %}
+                          <div class="my-3  text-center" ><h6 style="color: #ff440f;">{{message}}</h6></div>
+                      {% endif %}
+                    <div class="d-flex-column align-items-center justify-content-center pb-4">
+                      <p class="mb-0 me-2">Don't have an account?</p><br>
+                      <a href="/register" type="button" class="btn btn-outline-danger ">Create new</a>
+                    </div>
+  
+                  </form>
+  
+                </div>
+              </div>
+              <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                  <h2 class="mb-4">Don't have an fortify Account</h2>
+                  <a href="/blog_index" class="btn btn-light   p-4 fa-lg  mt-4 mb-3" type="button" style="font-size: 21px;">Read As Guest</a>
+                  <!-- gradient-custom-2 -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock body %}

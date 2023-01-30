@@ -1,0 +1,399 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Profile
+{% endblock title %}
+
+
+
+{% block body %}
+</head>
+<link rel="stylesheet" href="/static/css-profile.css">
+<script src="https://kit.fontawesome.com/33c38d4f7a.js" crossorigin="anonymous"></script>
+<body>
+    <div class="">
+
+        <a href="/profile" type="button" class="btn  mt-2 btn-outline-danger">Go To Profile</a>
+      </div>
+
+    <section style="background-color: #fff;">
+        <div class="container py-5">
+          <div class="row">
+            <div class="col">
+              <nav aria-label="breadcrumb" class="bg-light d-flex flex-wrap justify-content-between align-items-center rounded-3 p-3 mb-4 ">
+                <ol class="breadcrumb mb-0  ">
+                  <li class="breadcrumb-item"><a href="#" style="color:black;text-decoration: none;">Login</a></li>
+                  <li class="breadcrumb-item"><a href="#" style="color:black;text-decoration: none;">{{user.name}}</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Search Profile</li>
+
+                  
+                </ol>
+                
+                <form action="/getprofile" class="ml-5 flex" method="POST">
+                  <input type="text" class="rounded-2" name="queryusername" id="queryusername" placeholder="Search User">
+                  <button type="submit" class="border-0">
+                    <i class="fa-solid fa-search text-primary"></i>
+                  </button> 
+                </form>
+
+
+
+              </nav>
+            </div>
+          </div>
+          {% if message %}
+          <div class="my-3 mt-2 text-center" ><h6 style="color: #ff440f;">{{message}}</h6></div>
+          {% endif %}
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="card mb-4">
+                <div class="card-body text-center">
+                  {% if user.gender=="Male" %}
+                  <!-- <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                  class="rounded-circle img-fluid" style="width: 150px;"> -->
+                    
+                  <!-- <img src="https://i.pinimg.com/736x/b5/ce/fb/b5cefbeb4ed0d8790d61654ca45c9da0.jpg" alt="avatar"
+                  class="rounded-circle img-fluid" style="width: 150px;"> -->
+                  <!-- <img src="https://i.pinimg.com/564x/49/60/32/496032fb38b76e5bc22f8eb1d4a5d9be.jpg" alt="avatar"
+                  class="rounded-circle img-fluid" style="width: 150px;"> -->
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWpma9oteeLf2Sk8CvT2lyIYwgY33UQuEmRKZkesjAWalnbgEzcHF0Epz403zQljM-hpA&usqp=CAU" alt="Avatar">
+                  {% endif %}
+                  {% if user.gender=="Female" %}
+                  <img src="https://t4.ftcdn.net/jpg/03/85/50/01/360_F_385500115_T8QiYsPeliQ5tE3npwOuJNUfunqFBo1U.jpg" alt="avatar"
+                  class="rounded-circle img-fluid" style="width: 150px;">
+                  
+                  {% endif %}
+                  <h5 class="my-3">{{user.name}}</h5>
+                  <p class=" mb-1 fs-5 text-info-emphasis mt-2 mb-2 ">{{user.bio}}</p>
+                  <p class="text-muted mb-4">{{user.username}}</p>
+                  <p class="text-muted mb-4">Friends {{frnd|length}}</p>
+                    {% if already_frnd %}
+                    <div class="d-flex justify-content-center mb-2">
+                      <button type="button" class="btn btn-success ms-1">Friends</button>
+                      <!-- <a href="/showblog" type="button" class="btn btn-outline-primary ms-1">Show Blogs</a><br>   -->
+                    </div>
+                        
+                    {% endif %}
+                    {% if already_frnd==None and cur.username!=user.username %}
+                    <div class="d-flex justify-content-center mb-2">
+                        <a href="/addfrnd/{{user.username}}" type="button" class="btn btn-outline-danger ms-1">Add Friend</a>
+                        <!-- <a href="/showblog" type="button" class="btn btn-outline-primary ms-1">Show Blogs</a><br>   -->
+                      </div>
+                    {% endif %}
+
+
+                      {% if cur.username==user.username %}
+                      <div class="d-flex justify-content-center mb-2">
+                        <button type="button" class="btn btn-success ms-1">Your Own Profile</button>
+                        <!-- <a href="/showblog" type="button" class="btn btn-outline-primary ms-1">Show Blogs</a><br>   -->
+                      </div>
+                      {% endif %}
+
+                </div>
+              </div>
+              <!-- <div>
+                
+                <a href="/logout" type="button" class="btn btn-outline-danger mb-2 btn-lg">Logout</a>
+                
+              </div> -->
+              
+            </div>
+            <div class="col-lg-8">
+              <div class="card mb-4">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Full Name</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{user.name}}</p>
+                    </div>
+                  </div>
+                  <hr>
+                  
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Email</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{user.email}}</p>
+                    </div>
+                  </div>
+                  <hr>
+                  {% if user.email_verified==1 %}
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Verified User</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0"><span class="text-success" style="font-size: large;font-weight: 600;">Verified</span></p>
+                    </div>
+                  </div>
+                  <hr>
+                  {% endif %}
+                  {% if user.email_verified==0 %}
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Verified user</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0 d-flex justify-content-between" >
+                        
+                            <i class="fa-solid fa-xmark text-danger fs-5"></i>
+                        
+                        <!-- <span class="text-danger" style="font-size: small; font-weight: 600;">Unverified user's may not be able to publish blogs</span> -->
+                    </p>
+                    </div>
+                  </div>
+                  <hr>
+                  {% endif %}
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Username</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{user.username}}</p>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Phone No.</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{user.phone}}</p>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Bio</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <!-- <form action="/addbio" method="POST">
+                        <input type="text" name="bio" id="bio" class="rounded form-control"  maxlength="50" {% if user.bio  %}
+                          value="{{user.bio}}"
+                        {% endif %} placeholder="Write your bio in 50 char">
+                        <button type="submit" class="form-control border-0"><i class="fa-solid fa-upload text-success"></i></button>   
+                      </form> -->
+                      <div>
+                        <p class="fs-6 " style="color: #262626;font-weight: 600;">{{user.bio}}</p>
+                      </div>
+                      <!-- <p class="text-muted mb-0">{{user.phone}}</p> -->
+                    </div>
+                  </div>
+                  <hr>
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Blogs Published</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{note|length}}</p>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0 text-danger">Likes Achieved</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{user.total_likes}}</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <!-- {%set count=namespace(value=0)%}
+                  {% if note|length>0 %}
+
+                  {% for l in note.like %}
+                  {% set count.value=count.value+l%}
+                  {% endfor %}
+                  
+                  {% endif %} -->
+                  <!-- {{count.value}} -->
+                  <!-- {{count}} -->
+
+
+                  <!-- <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Total likes</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{count.value}}</p>
+                    </div>
+                  </div>
+                  <hr> -->
+                  <!-- <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Mobile</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">(098) 765-4321</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Address</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">Bay Area, San Francisco, CA</p>
+                    </div>
+                  </div> -->
+                <!-- </div>
+              </div> -->
+              <br>  
+              <h3>{{user.name}} <span class="text-danger">Works</span>  </h3>
+
+
+
+
+              <div class="row mt-5">
+                {% for note in user.notes %}
+                  
+                
+                <div class="col-md-6 mb-3">
+                  <div class="card mb-4 mb-md-0">
+                    <div class="card-body" >  
+                      <!-- style="background:#bdc3c7;" -->
+                      <p class="mb-4 h3" style="font-size: 1.5rem;"><span class="text-danger font-italic me-1">Title</span>{{note.title}}
+                      </p>
+
+                      <p class="mb-1" style="font-size: .77rem;"></p>
+                      <!-- <div class="progress rounded" style="height: 5px;">
+                        <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
+                          aria-valuemin="0" aria-valuemax="100"></div>
+                      </div> -->
+
+                      <p class="mt-4 mb-1" style="font-size: 1.2rem;">Date - <span class="text-primary">{{note.date}}</span></p>
+                      <!-- <div class="progress rounded" style="height: 5px;">
+                        <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72"
+                          aria-valuemin="0" aria-valuemax="100"></div>
+                      </div> -->
+                      <p class="mt-4 mb-1" style="font-size: 1.1rem;"><span style="word-break: break-all;">{{note.data[:20]}}</span></p>
+                      <!-- <div class="progress rounded" style="height: 5px;">
+                        <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
+                          aria-valuemin="0" aria-valuemax="100"></div>
+                      </div> -->
+                      <div>
+                        <a href="/singleblog/{{note.id}}" class="text-danger">Read more</a>
+                      </div>
+                      <p class="mt-4 mb-1" style="font-size: .77rem;"><span style="font-size: 30px;"><i class="fa-regular fa-heart text-danger"></i></span></i><span class="text-danger" style="font-size: 15px;">{{note.like}}</span></p>
+                      <!-- <div class="progress rounded" style="height: 5px;">
+                        <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
+                          aria-valuemin="0" aria-valuemax="100"></div>
+                      </div> -->
+                      <!-- <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p> -->
+                      <!-- <div class="progress rounded mb-2" style="height: 5px;">
+                        <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
+                          aria-valuemin="0" aria-valuemax="100"></div>
+                      </div> -->
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+
+
+
+
+                <!-- <div class="col-md-6">
+                  <div class="card mb-4 mb-md-0">
+                    <div class="card-body">
+                      <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> Project Status
+                      </p>
+                      <p class="mb-1" style="font-size: .77rem;">Web Design</p>
+                      <div class="progress rounded" style="height: 5px;">
+                        <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
+                          aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                      <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
+                      <div class="progress rounded" style="height: 5px;">
+                        <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72"
+                          aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                      <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
+                      <div class="progress rounded" style="height: 5px;">
+                        <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
+                          aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                      <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
+                      <div class="progress rounded" style="height: 5px;">
+                        <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
+                          aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                      <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
+                      <div class="progress rounded mb-2" style="height: 5px;">
+                        <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
+                          aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+
+                <div class="col-md-6 mt-1">
+                  <div class="card mb-4 mb-md-0">
+                    <div class="card-body">
+                      <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> Project Status
+                      </p>
+                      <p class="mb-1" style="font-size: .77rem;">Web Design</p>
+                      <div class="progress rounded" style="height: 5px;">
+                        <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
+                          aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                      <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
+                      <div class="progress rounded" style="height: 5px;">
+                        <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72"
+                          aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                      <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
+                      <div class="progress rounded" style="height: 5px;">
+                        <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
+                          aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                      <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
+                      <div class="progress rounded" style="height: 5px;">
+                        <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
+                          aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                      <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
+                      <div class="progress rounded mb-2" style="height: 5px;">
+                        <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
+                          aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+ -->
+
+
+                
+
+
+
+
+
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+
+{% endblock body %}

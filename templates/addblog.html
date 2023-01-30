@@ -1,0 +1,53 @@
+{% extends 'base.html' %} {% block title %} {{button}}Blog {% endblock title %} {%
+block body %}
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  
+
+<div class="m-2">
+
+  <a href="/profile" type="button" class="btn  mt-2 btn-outline-danger">Go To Profile</a>
+</div>
+{% if message %}
+<div class="my-3 mt-2 text-center" ><h6 style="color: #ff440f;">{{message}}</h6></div>
+{% endif %}
+
+
+{% if user.email_verified==1 %}
+<h1 class="mt-2 mb-5 text-center " style="color: #262626;font-family:poppins;font-size: 50px;font-weight: 600;">{{heading}} Your Blog</h1>
+  
+<form action="/addblog" method="POST" style="padding: 30px;width: 95vw; margin: auto;margin-bottom: 60px;">
+  <input
+    type="text"
+    name="title"
+    class="form-control"
+    id="exampleInputEmail1"
+    aria-describedby="emailHelp"
+    placeholder="Title"
+    class="form-control"
+    style="background-color: #fff; color: #000;margin-top: 60px;width: 80vw; margin: auto;border: 2px solid black;"
+  />
+
+  <textarea name="blogdata" id="blog" value="Write your blog here..." style="color: #000; width: 80vw; margin: auto;border: 2px solid black;" cols="3" rows="18" placeholder="Write your blog here..." class="mt-5 form-control"  placeholder="Write Your Blog Here" ></textarea>
+
+  <div align="center" class="mt-5">
+
+      <button type="submit"  class="btn btn-outline-danger mb-3 btn-lg">{{button}} Blog</button>
+  </div>
+</form>
+{% endif %}
+{% if user.email_verified==0 %} 
+  
+<div class="mb-5">
+
+  <h3 class="text-red-900  text-center p-12 mb-40" style="font-size: 100px;">Verify Your Account </h3>
+  <h3 class="text-red-900  text-center p-12 " style="font-size: 50px;">You can find verification button on your profile page</h3>
+</div>
+<div class="h-max"></div>
+
+{% endif %}
+
+
+{% endblock body %}

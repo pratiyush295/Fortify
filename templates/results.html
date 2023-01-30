@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+{% block title %}
+Results
+{% endblock title %}
+
+{% block body %}
+
+<link rel="stylesheet" href="/static/css-results.css">
+<!-- <script src="https://cdn.tailwindcss.com"></script> -->
+</head>
+
+<body>
+
+
+    <div class="container">
+
+        <div class="row ng-scope">
+            <!-- <div class="col-md-3 col-md-push-9">
+                <h4>Results <span class="fw-semi-bold">Filtering</span></h4>
+                <p class="text-muted fs-mini">Listed content is categorized by the following groups:</p>
+                <ul class="nav nav-pills nav-stacked search-result-categories mt">
+                    <li><a href="#">Friends <span class="badge">34</span></a>
+                    </li>
+                    <li><a href="#">Pages <span class="badge">9</span></a>
+                    </li>
+                    <li><a href="#">Images</a>
+                    </li>
+                    <li><a href="#">Groups</a>
+                    </li>
+                    <li><a href="#">Globals <span class="badge">18</span></a>
+                    </li>
+                </ul>
+            </div> -->
+
+
+            <p class="search-results-count">About {{frnd|length}} results</p>
+
+            {% if frnd_list %}
+            
+            {% for f in frnd %}
+                
+
+            <div class="col-md-9 col-md-pull-3 p-8 mb-4">
+                <section class="search-result-item">
+                    <a class="image-link" href="#"><img class="image"
+                            src="https://nftnow.com/wp-content/uploads/2022/08/pudgy-penguin-6873.png" style="width: 200px;">
+                    </a>
+                    <div class="search-result-item-body">
+                        <div class="row">
+                            <div class="col-sm-9">
+                                <h4 class="search-result-item-heading m-2"><a href="/getprofile_parameter/{{f.frnd_username}}" class="text-xl ">{{f.frnd_username}}</a></h4>
+                                <p class="info text-primary fs-5 mt-4">Friends Since <span class="text-danger fs-4">{{f.date}}</span></p>
+                                <!-- <p class="description">Not just usual Metro. But something bigger. Not just usual
+                                    widgets, but real widgets. Not just yet another admin template, but next generation
+                                    admin template.</p> -->
+                            </div>
+                            <div class="col-sm-3 text-align-center">
+                                <!-- <p class="value3 mt-sm">$9, 700</p> -->
+                                <a class="btn btn-primary btn-info btn-sm"
+                                    href="/getprofile_parameter/{{f.frnd_username}}">View Profile</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+
+
+            {% endfor %}
+
+            <h3 class="text-red-900  text-center p-12 mb-40" style="font-size: 100px;color: #ff004f; padding: 60px;margin-bottom: 30px;">End Of List </h3>
+
+
+            {% endif %}
+
+
+            {% if frnd_list=="no" %}
+            <div class="mb-5">
+
+                <h3 class="text-red-900  text-center p-12 mb-40" style="font-size: 100px;">You have no friends </h3>
+                <h3 class="text-red-900  text-center p-12 " style="font-size: 50px;margin-top: 30px;">But sure you won't die like this (:-)</h3>
+              </div>
+              <div class="h-max"></div>
+            {% endif %}
+
+              
+            {% if elite=="yes" %}
+                {% for u in user|sort(attribute='total_likes', reverse = True) %}
+                <div class="col-md-9 col-md-pull-3 p-8 mb-4">
+                    <section class="search-result-item">
+                        <h2 class="text-warning">{{loop.index}}</h2>
+                        <a class="image-link" href="#"><img class="image"
+                                src="https://cdn-icons-png.flaticon.com/512/556/556099.png" style="width: 200px;">
+                        </a>
+                        <div class="search-result-item-body">
+                            <div class="row">
+                                <div class="col-sm-9">
+                                    <h4 class="search-result-item-heading m-2"><a href="/getprofile_parameter/{{u.username}}" class="text-xl ">{{u.username}}</a></h4>
+                                    <p class="info text-dark fs-5 mt-4">Name <span class="text-danger fs-4">{{u.name}}</span></p>
+                                    <p class="info text-dark fs-5 mt-4">Likes Achieved <span class="text-danger fs-4">{{u.total_likes}}</span></p>
+                                    <p class="info text-dark fs-5 mt-4">Blogs Published <span class="text-danger fs-4">{{u.notes|length}}</span></p>
+                                    <p class="info text-dark fs-5 mt-4">Bio <span class="text-danger fs-6">{{u.bio}}</span></p>
+                                    
+                                </div>
+                                <div class="col-sm-3 text-align-center">
+                                    
+                                    <a class="btn btn-primary btn-info btn-sm"
+                                        href="/getprofile_parameter/{{u.username}}">View Profile</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                {% endfor %}
+            {% endif %}
+
+
+            {% if search %}
+            pratiyush
+            {% for u in user %}
+            <div class="col-md-9 col-md-pull-3 p-8 mb-4">
+                <section class="search-result-item">
+                    <h2 class="text-warning">{{loop.index}}</h2>
+                    <a class="image-link" href="#"><img class="image"
+                            src="https://cdn-icons-png.flaticon.com/512/556/556099.png" style="width: 200px;">
+                    </a>
+                    <div class="search-result-item-body">
+                        <div class="row">
+                            <div class="col-sm-9">
+                                <h4 class="search-result-item-heading m-2"><a href="/getprofile_parameter/{{u.username}}" class="text-xl ">{{u.username}}</a></h4>
+                                <p class="info text-dark fs-5 mt-4">Name <span class="text-danger fs-4">{{u.name}}</span></p>
+                                <p class="info text-dark fs-5 mt-4">Likes Achieved <span class="text-danger fs-4">{{u.total_likes}}</span></p>
+                                <p class="info text-dark fs-5 mt-4">Blogs Published <span class="text-danger fs-4">{{u.notes|length}}</span></p>
+                                <p class="info text-dark fs-5 mt-4">Bio <span class="text-danger fs-6">{{u.bio}}</span></p>
+                                
+                            </div>
+                            <div class="col-sm-3 text-align-center">
+                                
+                                <a class="btn btn-primary btn-info btn-sm"
+                                    href="/getprofile_parameter/{{u.username}}">View Profile</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            {% endfor %}
+            {% endif %}
+
+
+        </div>
+    </div>
+
+    {% endblock body %}

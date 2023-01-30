@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %}
+    OtpValidation
+{% endblock title %}
+
+{% block body %}
+    <link rel="stylesheet" href="/static/css-otp.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <a href="/profile" type="button" class="btn mx-1 mt-2 btn-outline-danger">Go To Profile</a>
+    <div class="d-flex justify-content-center align-items-center container">
+        <div class="card py-5 px-3">
+            <h5 class="m-0">Email verification</h5><span class="mobile-text">Enter the code we just send on your email(Check spam if otp still missing) <b class="text-danger">{{user.email}}</b></span>
+            <div class="d-flex flex-row mt-5">
+                <form action="/otp" method="POST" class="flex">
+
+                    <input type="text" id="form3Example3c" name="otp" class="form-control"  placeholder="Enter Otp"/>
+                    <button type="submit" class="btn btn-outline-danger ">Submit</button>
+                </form>
+                
+                
+                
+                
+            </div>
+            <!-- <a href="/otp" mthod="POST" class="text-center">
+                <button class="" style="size: 50px;margin: auto;">Submit</button>
+
+            </a> -->
+            <div class="text-center mt-3"><span class="d-block mobile-text">Don't receive the code?</span><span class="font-weight-bold text-danger cursor"> <a href="/otp" class="text-danger text-decoration-none">Resend</a> </span></div>
+            {% if message %}
+                          <div class="my-3  text-center" ><h6 style="color: #ff440f;">{{message}}</h6></div>
+                      {% endif %}
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock body %} 
