@@ -20,6 +20,11 @@
 </head>
 <body>
 
+
+{% if all=="goa" %}
+    
+
+
 <div class="m-2">
 
     <a href="/profile" type="button" class="btn  mt-2 btn-outline-dark">Go To Profile</a>
@@ -77,6 +82,75 @@
   </div>
 {% endif %}
 
+
+{% endif %}
+
+<!-- /////////////////////////////////////////////////////////////////////////////// -->
+{% if open=="yes" %}
+<div class="m-2">
+
+    <a href="/" type="button" class="btn  mt-2 btn-outline-danger">Login</a>
+  </div> 
+{% if note|length>0 %}
+<!-- ----------------------main code start------------------------------------------------     -->
+
+
+
+
+
+<section id="blog">
+
+
+    <div class="blog-heading">
+        <span>Elite Posts</span>
+        <h3>Open Reading Section</h3>
+    </div>
+
+    <!-- blog-container -->
+    <div class="blog-container">
+        {% for n in note|sort(attribute='like', reverse = True) %}
+        <div class="blog-box">
+
+            <div class="blog-img">
+                <!-- <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"> -->
+                <!-- <img src="https://png.pngtree.com/element_our/png/20181228/avatar-vector-icon-png_296057.jpg" alt=""> -->
+                <img src="https://png.pngtree.com/png-clipart/20210128/ourlarge/pngtree-handsome-boy-profile-png-image_2804586.jpg" alt="Avatar">
+                <!-- <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQt8OhQR2bp3iWmMbjaThx9YqueOWKMBV_dPQ&usqp=CAU" alt=""> -->
+            </div>
+
+            <div class="blog-text">
+                <span>{{note.date}}</span>
+                <a href="#" class="blog-title" style="word-break: break-all;">{{n.title}}</a>
+                <p style="word-break: break-all;">{{n.data[:60]}}. . .</p>
+                <a href="/">Read more (Make an account first)</a>
+                <span class="text-danger">Published by-Anonymous User</span>
+                <br>
+                <span><a href="/addlike/{{n.id}}"><i class="fa-regular fa-heart text-danger" style="font-size: 30px;"></i></a><span class="text-danger" style="font-size: 15px;margin-right: 15px;">{{n.like}}</span><span><i class="fa-regular fa-comment" style="font-size: 30px;"></i></span></span>
+            </div>
+
+            
+
+        </div>
+        {% endfor %}
+    </div>
+
+
+</section>
+
+
+
+<!-- ----------------------main code end------------------------------------------------     -->
+{% endif %}
+{% if note|length==0 %}
+<div class="mb-5">
+
+    <h3 class="text-red-900  text-center p-12 mb-40" style="font-size: 100px;">Currently now blogs to show</h3>
+    <h3 class="text-red-900  text-center p-12 " style="font-size: 50px;">You can add your first blog from profile</h3>
+  </div>
+{% endif %}
+
+
+{% endif %}
 
 
 

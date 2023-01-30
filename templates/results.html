@@ -33,10 +33,11 @@ Results
             </div> -->
 
 
-            <p class="search-results-count">About {{frnd|length}} results</p>
-
+            
+            
             {% if frnd_list %}
             
+            <p class="search-results-count">About {{frnd|length}} results</p>
             {% for f in frnd %}
                 
 
@@ -85,6 +86,7 @@ Results
 
               
             {% if elite=="yes" %}
+            <p class="search-results-count">About {{user|length}} results</p>
                 {% for u in user|sort(attribute='total_likes', reverse = True) %}
                 <div class="col-md-9 col-md-pull-3 p-8 mb-4">
                     <section class="search-result-item">
@@ -116,7 +118,7 @@ Results
 
 
             {% if search %}
-            pratiyush
+            <p class="search-results-count">About {{user|length}} results</p>
             {% for u in user %}
             <div class="col-md-9 col-md-pull-3 p-8 mb-4">
                 <section class="search-result-item">

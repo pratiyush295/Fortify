@@ -125,9 +125,7 @@ def home():
 
 
 
-@app.route('/blog_index')
-def blog_index():
-    return "goa"
+
 
 @app.route('/login_validation',methods=['GET','POST'])
 def login_validation():
@@ -340,6 +338,10 @@ def showblog():
 
     return render_template('showblog.html',all="goa",user=current_user)
 
+@app.route('/blog_index')
+def blog_index():
+    account_note=Note.query.all()
+    return render_template('showblog.html',open='yes',note=account_note)
 
 @app.route('/singleblog/<int:noteid>',methods=['POST','GET'])
 def singleblog(noteid):
