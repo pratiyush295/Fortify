@@ -62,7 +62,7 @@ class User(db.Model,UserMixin):
     email=db.Column(db.String(500),nullable=False)
     email_verified=db.Column(db.Boolean,default=False)
     otp=db.Column(db.Integer,nullable=True)
-    phone=db.Column(db.Integer,nullable=False)
+    phone=db.Column(db.String(20),nullable=False)
     username=db.Column(db.String(100),nullable=False)
     password=db.Column(db.String(100),nullable=False)
     bio=db.Column(db.String(1000),nullable=True)
