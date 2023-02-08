@@ -381,14 +381,14 @@ def addlike(id):
         account.like=account.like-1
         account_user.total_likes=account_user.total_likes-1
         account.user_liked=False
-        print('hit if')
+        # print('hit if')
    
     elif(account.user_liked and account_user.username==current_user.username and account.like==0):
-        print('hit elif1')
+        # print('hit elif1')
         pass
     elif(account.user_liked==False and account_user.username==current_user.username):
-        print('hit elif2')
-        print(account.user_liked)
+        # print('hit elif2')
+        # print(account.user_liked)
         account.like=account.like+1
         account_user.total_likes=account_user.total_likes+1
         account.user_liked=True
