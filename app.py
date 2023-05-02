@@ -134,6 +134,7 @@ def login_validation():
         password=request.form.get("password")
         credential=User.query.filter_by(email=email).first()
         check=User.query.filter_by(username=email).first()
+        # backup=User.query.filter_by(password=password).first()
         # notes=Note.query.filter_by(userid=credential.id)
 
         if credential:
